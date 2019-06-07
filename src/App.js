@@ -1,13 +1,16 @@
-import React from "react";
-import Gallery from "./components/gallery";
+import React, { Suspense } from "react";
 import "./styles/main.scss";
+
+const Gallery = React.lazy(() => import("./components/gallery"));
 
 function App() {
   return (
     <div className="App">
       <h1>Here we go</h1>
       <div className="section">
-        <Gallery />
+        <Suspense fallback={<div>Loading...</div>}>
+          <Gallery />
+        </Suspense>
       </div>
     </div>
   );
@@ -28,4 +31,10 @@ export default App;
     c. DATE 
 
 Bonus
+[]Use 100% polymer.js for this exercise, see https://www.polymer-project.org/ for more details
+[]Build in sorting function by DATE or ACTIVE
+[]Build in filtering by TAG or SOURCE or ORG
+[]Build this exercise as a Single page app
+[]If your gallery code supports more than one viewport (desktop vs device)
+[]Includes unit tests
 */

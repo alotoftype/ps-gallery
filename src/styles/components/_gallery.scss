@@ -1,3 +1,23 @@
 .gallery {
-  background-color: blue;
+  font-size: 1.6rem;
+  margin: 0.8rem;
+  text-align: center;
+
+  @include desktop {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 auto;
+    max-width: 128rem;
+  }
+
+  .gallery-item {
+    @include desktop {
+      width: calc((100% / 3) - 32px);
+      margin: 0.8rem 1.6rem;
+    }
+
+    img {
+      width: 100%;
+    }
+  }
 }

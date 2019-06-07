@@ -23,7 +23,7 @@ export default class Gallery extends Component {
     return (
       <section className="gallery">
         {images.map((image, index) => (
-          <div className="image-item" key={image.org.concat(index)}>
+          <div className="gallery-item" key={image.org.concat(index)}>
             <img src={image.image} alt={image.tag} />
             <p>{image.description}</p>
           </div>

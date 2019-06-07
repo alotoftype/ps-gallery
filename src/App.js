@@ -1,17 +1,14 @@
-import React from 'react';
-import Gallery from './components/gallery';
-
+import React from "react";
+import Gallery from "./components/gallery";
+import "./styles/main.scss";
 
 function App() {
-
-
   return (
     <div className="App">
       <h1>Here we go</h1>
       <div className="section">
-      <Gallery/>
+        <Gallery />
       </div>
-
     </div>
   );
 }

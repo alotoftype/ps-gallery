@@ -9,12 +9,18 @@ export default class Gallery extends Component {
     };
   }
   componentDidMount() {
-    axios.get("./api.json").then(({ data }) => {
-      console.log(data.rows);
-      this.setState({
-        images: data.rows
+    if (!version || version < currentVersion) {
+      axios.get("./api.json").then(({ data }) => {
+        console.log(data.rows);
+        this.setState({
+          images: data.rows
+        });
+        localStorage.setItem("data", JSON.stringify(data.rows));
+        localStorage.setItem("version", currentVersion);
       });
-    });
+    } else {
+      this.setState({ images: JSON.parse(localStorage.data) });
+    }
   }
 
   render() {
@@ -25,6 +31,14 @@ export default class Gallery extends Component {
         {images.map((image, index) => (
           <div className="gallery-item" key={image.org.concat(index)}>
             <img src={image.image} alt={image.tag} />
+            <div>
+              <span>
+                {image.tag
+                  .split("|")
+                  .map(tag => tag)
+                  .join(" ")}
+              </span>
+            </div>
             <p>{image.description}</p>
           </div>
         ))}
@@ -32,3 +46,7 @@ export default class Gallery extends Component {
     );
   }
 }
+
+const currentVersion = 3;
+let data = localStorage.getItem("data");
+let version = localStorage.getItem("version");

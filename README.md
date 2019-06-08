@@ -36,3 +36,7 @@ npm install -g polymer-cli
 
 
 ## Build Step ##
+This was setup using the create React App 
+1. clone repository
+2. run` yarn install` or `npm install`
+3. run `yarn start`

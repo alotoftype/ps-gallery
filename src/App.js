@@ -6,7 +6,7 @@ const Gallery = React.lazy(() => import("./components/gallery"));
 function App() {
   return (
     <div className="App">
-      <h1>Here we go</h1>
+      <h1>Photo Shelter Gallery</h1>
       <div className="section">
         <Suspense fallback={<div>Loading...</div>}>
           <Gallery />

@@ -8,22 +8,25 @@ export default class Gallery extends Component {
       images: [],
       filter:""
     };
-    this.filterGallery = this.filterGallery.bind(this)
 }
 
 
-  filterGallery(e) {
+  filterGallery = e => {
     this.setState({filter: e.target.value})
   }
-
+  sortbyDate = images  => e => {
+    const sorted = images
+    sorted.sort((a, b) => a - b) 
+    console.log(sorted.map(sort => console.log(sort.date ,sort.description)))
+  }
   sortGallery = value => e => {
     switch(value){
       case 'date':
-        return 'hello'
+        return ''
       case 'Active':
-        return 'hi'
+        return ''
       default:
-        return 'by'
+        return ''
   }
 }
   
@@ -50,11 +53,16 @@ export default class Gallery extends Component {
       Object.keys(image).some(key => image[key]
         .toLowerCase().includes(query)))
     return (
-      <section className="gallery">
-        <div>
+      <>
+        <div className="gallery-filters">
+           <div className="gallery-filters__options">
           <input type="text" onChange={this.filterGallery} value={filter} />
+          <button onClick={this.sortbyDate(filteredImages)}>sort by date</button>
         </div>
-        
+        </div>
+      <section className="gallery">
+       
+        {filteredImages.map(image => console.log(image.date , image.description))}
         {filteredImages.map((image, index) => (
           <div className="gallery-item" key={image.org.concat(index)}>
             <div className="gallery-item__date">{image.date}</div>
@@ -73,6 +81,7 @@ export default class Gallery extends Component {
           </div>
         ))}
       </section>
+      </>
     );
   }
 }

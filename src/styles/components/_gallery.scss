@@ -15,9 +15,27 @@
       width: calc((100% / 3) - 32px);
       margin: 0.8rem 1.6rem;
     }
+  }
+
+  .gallery-item__image {
+    max-height: 40rem;
+    overflow: hidden;
+
+    @include desktop {
+      max-height: 30rem;
+      object-fit: cover;
+      object-position: center center;
+      //overflow: hidden;
+    }
 
     img {
       width: 100%;
+      height: 100%;
+      @include desktop {
+        height: 100%;
+        object-fit: cover;
+        overflow: hidden;
+      }
     }
   }
 }

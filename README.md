@@ -5,6 +5,10 @@
 Coding excercise
 ---
 
+Materials Needed
+
+[] https://github.com/webroo/dummy-json#available-helpers
+
 ## Instructions ##
 Please create a gallery that displays images
 

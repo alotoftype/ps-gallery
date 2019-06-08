@@ -5,9 +5,29 @@ export default class Gallery extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      images: []
+      images: [],
+      filter:""
     };
+    this.filterGallery = this.filterGallery.bind(this)
+}
+
+
+  filterGallery(e) {
+    this.setState({filter: e.target.value})
   }
+
+  sortGallery = value => e => {
+    switch(value){
+      case 'date':
+        return 'hello'
+      case 'Active':
+        return 'hi'
+      default:
+        return 'by'
+  }
+}
+  
+
   componentDidMount() {
     if (!version || version < currentVersion) {
       axios.get("./api.json").then(({ data }) => {
@@ -19,27 +39,37 @@ export default class Gallery extends Component {
         localStorage.setItem("version", currentVersion);
       });
     } else {
-      this.setState({ images: JSON.parse(localStorage.data) });
+      this.setState({ images: JSON.parse(data) });
     }
   }
 
   render() {
-    const { images } = this.state;
-    console.log("these are my images: ", images);
+    const { filter, images } = this.state;
+    const query = filter.toLowerCase();
+    const filteredImages = images.filter(image => 
+      Object.keys(image).some(key => image[key]
+        .toLowerCase().includes(query)))
     return (
       <section className="gallery">
-        {images.map((image, index) => (
+        <div>
+          <input type="text" onChange={this.filterGallery} value={filter} />
+        </div>
+        
+        {filteredImages.map((image, index) => (
           <div className="gallery-item" key={image.org.concat(index)}>
-            <img src={image.image} alt={image.tag} />
+            <div className="gallery-item__date">{image.date}</div>
+            <div className="gallery-item__image">
+              <img src={image.image} alt={image.tag} />
+            </div>
             <div>
-              <span>
+              <>
                 {image.tag
                   .split("|")
                   .map(tag => tag)
                   .join(" ")}
-              </span>
+              </>
             </div>
-            <p>{image.description}</p>
+            <p className="gallery-item__desciption">{image.description}</p>
           </div>
         ))}
       </section>

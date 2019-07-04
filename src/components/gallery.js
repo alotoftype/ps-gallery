@@ -33,7 +33,7 @@ export default class Gallery extends Component {
 
   componentDidMount() {
     if (!version || version < currentVersion) {
-      axios.get("http://gsx2json.com/api?id=1wZa0Gx2yAFDyMVayzRn428SDXCOJHOL-0_IX9uLiWW0").then(({ data }) => {
+      axios.get("./api.json").then(({ data }) => {
         console.log(data.rows);
         this.setState({
           images: data.rows
